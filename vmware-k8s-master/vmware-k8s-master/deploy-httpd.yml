@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: deploy-httpd
+  labels: 
+    app: httpd
+
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: #Update Pods a certain number at a time
+      maxUnavailable: 1 #Total number of pods that can be unavailable at once
+  
+  template: 
+    metadata: 
+      name: httpd
+      labels: 
+        app: httpd
+    spec: 
+      containers: 
+        - name: httpd
+          image: kulbhushanmayer/httpd:1.1
+
+  selector:
+    matchLabels: 
+      app: httpd
+
+  replicas: 4

@@ -1,0 +1,64 @@
+IP Node - 54.237.65.159
+Master - 100.25.152.95
+
+https://github.com/thinknyx-technologies-llp/DevOps-Conference.git
+
+mvn clean package
+
+docker run -d --name tomcat -p 8080:8080 -v $PWD/target/:/usr/local/tomcat/webapps/ tomcat:8
+
+https://labs.play-with-k8s.com/
+
+kubeadm token create --print-join-command - Run in master to generate token for nodes
+(After the token got generated, copy the command with token and execute in node machine)
+
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+kubectl get nodes - To diplay nodes confgiured in Master
+
+kubectl delete <node_name> - To delete the kube node
+
+kubectl describe <node_name> - To display the details about the node
+
+kubectl label node <node_name> <label_name> - To label the nodes
+
+kubectl get pods --all-namespaces - To display the pods in all namespaces
+
+kubectl get ns - To display the namespaces available
+
+Pod will auto heal container by using another container which monitors the running continers.
+replica set will manage and auto heal Pod.
+
+kubectl get rs - To show the replica sets
+
+Difference between replicaset and deployment file is kind (kind: ReplicaSet kind: Deployment)
+
+kubectl scale deploy <deployment_name> --replicas=7 - To scale up replicas
+
+kubectl apply -f <deployment_definition_filename> - To apply the deployment
+
+kubectl apply -f <replicaset_definition_filename> - To apply the replicaset
+
+kubectl get <replicaset_definition_filename> - To display the replicasets available
+
+kubectl rollout history deployment/<deployment_name> - To display the history
+
+Kubectl rollout undo deploy <deployment_name> --revision=<revision_number>
+
+kubectl rollout status deployment/<deployment_name>
+
+kubectl expose deployment <deployment_name> --port=80 --type=NodePort
+
+kubectl get svc
+
+kubectl delete svc <deployment_name> - To delete the service
+
+NodeSelctor - To define where the pods can be deployed (which node)
+
+kubectl taint node <node_name> taintdemo=true:NoSchedule - To apply taint on node (we can add tolerance in deploy metadata in order to allow the toleration for taint)
+
+kubectl taint node <node_name> taintdemo - (untaint the node)
+
+kubectl cordon <node_name> - To disable scheduling in node
+
+kubectl uncordon <node_name> - To enable scheduling in node
